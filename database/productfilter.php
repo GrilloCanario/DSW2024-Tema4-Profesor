@@ -1,5 +1,10 @@
 <?php
-  require_once 'connection.php'; //conexión de mysqli
+require 'connectionPDO.php';
+
+$stmt = $link->prepare('SELECT FROM products WHERE price > :min');
+$stmt->bindParam(":min", $_GET['min']);
+$stmt->execute();
+$result -> $stmt->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,19 +12,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <style>
-    th, td {
-      border: 1px solid black;
-      padding: 4px 10px;
-    }
-  </style>
 </head>
 <body>
-  <h1>Tabla productos</h1>
-  <p>
-    <a href="create.html">Crear nuevo producto</a>
-  </p>
-  <table>
+<table>
     <thead>
       <tr>
         <th>id</th>
